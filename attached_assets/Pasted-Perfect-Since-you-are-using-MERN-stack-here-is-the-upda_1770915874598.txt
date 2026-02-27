@@ -1,0 +1,360 @@
+Perfect 👍
+Since you are using MERN stack, here is the updated & structured FRONTEND PRD for Agro-Sense (MERN based, JavaScript only).
+
+This is written so a React frontend developer can build the entire UI step-by-step.
+
+🌱 Agro-Sense — Frontend PRD (MERN Stack)
+🧩 Tech Stack (Frontend)
+
+✔ React.js (JavaScript only — no TypeScript)
+✔ React Router DOM (page navigation)
+✔ Axios (API calls)
+✔ Chart.js or Recharts (graphs)
+✔ Context API / Redux (global state)
+✔ CSS / Tailwind CSS (UI styling)
+✔ React Icons (icons)
+✔ Geolocation API (user location)
+✔ Weather API (OpenWeatherMap recommended)
+
+📁 Recommended Frontend Folder Structure
+src/
+ ├── assets/
+ │   ├── logo.png
+ │   └── icons/
+ │
+ ├── components/
+ │   ├── Navbar.js
+ │   ├── BatteryIndicator.js
+ │   ├── PumpSwitch.js
+ │   ├── CropStageCard.js
+ │   ├── SoilMoistureCard.js
+ │   ├── WeatherCard.js
+ │   ├── RainSensorCard.js
+ │   ├── CropNeedsCard.js
+ │   ├── NotificationItem.js
+ │   └── Chatbot.js
+ │
+ ├── pages/
+ │   ├── Login.js
+ │   ├── Home.js
+ │   ├── Dashboard.js
+ │   ├── Progress.js
+ │   ├── Notifications.js
+ │   ├── Profile.js
+ │   └── Help.js
+ │
+ ├── context/
+ │   └── AppContext.js
+ │
+ ├── services/
+ │   ├── weatherAPI.js
+ │   └── sensorAPI.js
+ │
+ ├── utils/
+ │   ├── cropStages.js
+ │   └── thresholds.js
+ │
+ ├── App.js
+ └── index.js
+
+3️⃣ Authentication Page
+Login Page UI
+
+Fields:
+
+Email
+
+Password
+
+👁 show/hide password
+
+Forgot password (bottom right of password field)
+
+Sign In button
+
+Sign Up link
+
+Logo:
+
+Green square leaf logo
+
+Title → Agro-Sense
+
+Subtitle → Smart Irrigation for Modern Farmers
+
+Validation:
+
+Required fields
+
+Email format
+
+On success → redirect to Home
+
+4️⃣ Global Navbar (All Logged-in Pages)
+
+Left:
+✔ Logo + Agro-Sense
+
+Center Navigation:
+✔ Home
+✔ Dashboard
+✔ Progress
+✔ Notifications
+✔ Profile
+✔ Help
+
+Right:
+✔ Crop Type Selector (default = Wheat)
+✔ Logout button
+
+5️⃣ HOME PAGE (Real-Time Monitoring)
+A. Crop Type Selector
+
+Dropdown:
+
+Wheat (default)
+
+Rice
+
+Corn
+
+Others (future)
+
+B. Crop Growth Stage (Auto calculated)
+
+Based on crop age in days
+
+Stages:
+
+Stage	Days
+Germination	1–12
+Tillering	13–35
+Stem Extension	36–65
+Heading	66–85
+Grain Filling	86–115
+Ripening	116–140
+
+UI:
+
+Stage card with icon
+
+Highlight current stage
+
+Logic:
+
+currentStage = calculateStage(cropAgeDays)
+
+C. Soil Moisture Card
+
+Display:
+✔ Live indicator (green dot)
+✔ Moisture %
+✔ Sensor status
+
+Example:
+
+Soil Moisture: 61.7%
+Status: Live
+
+
+Real-time from sensor API or WebSocket.
+
+D. What Your Crop Needs (Decision Engine)
+
+Based on thresholds:
+
+Example logic:
+
+IF soilMoisture < 30% → Water Required
+IF soilMoisture > 60% → No irrigation
+IF nutrientLow → Fertilizer required
+IF rainDetected → Stop irrigation
+
+
+Display cards:
+
+✔ Water requirement
+✔ Fertilizer requirement
+✔ Warning messages
+
+E. Weather Section (Real-Time API)
+
+Use:
+
+OpenWeatherMap API
+
+Show:
+
+✔ Location (auto GPS)
+✔ Temperature °C
+✔ Weather icon
+✔ Tag (cloudy / rainy / sunny)
+✔ Humidity
+✔ Wind speed
+✔ Rain chance %
+
+F. Rain Detection Sensor
+
+Separate card:
+
+Status:
+✔ Rain detected / No rain
+✔ If rain detected → show alert
+
+6️⃣ DASHBOARD PAGE
+
+Title:
+Dashboard (Real-time monitoring & control)
+
+A. Solar Battery Level
+
+Visual battery indicator:
+
+✔ Percentage
+✔ Charging status
+✔ Color based on level
+
+0–20 red
+21–60 yellow
+61–100 green
+
+B. Pump Control System
+
+Modes:
+
+AUTO (default)
+
+System decides:
+
+Pump ON if:
+
+moisture low
+
+no rain
+
+Pump OFF if:
+
+moisture sufficient
+
+rain detected
+
+MANUAL
+
+Farmer controls:
+
+Toggle switch:
+ON / OFF
+
+7️⃣ PROGRESS PAGE
+Water Usage (This Week)
+
+Bar Graph (7 bars)
+
+Display above graph:
+
+Left:
+✔ Total water required this week
+
+Right:
+✔ Average water per day
+
+Data source:
+sensor logs
+
+8️⃣ NOTIFICATIONS PAGE
+
+List format (newest first)
+
+Examples:
+
+✔ Low Soil Moisture
+✔ Rain Detected
+✔ Sensor Warning
+✔ Moisture Restored
+✔ Rain Forecast
+
+Each item:
+
+Title
+Message
+Time
+Icon
+
+9️⃣ PROFILE PAGE
+
+Farmer Details:
+
+✔ Name
+✔ Email
+✔ Location
+✔ Crop type
+✔ Crop start date
+
+Button:
+✔ Logout
+
+🔟 HELP PAGE
+AI Chatbot
+
+Functions:
+
+✔ Answer farmer questions
+✔ Irrigation advice
+✔ Fertilizer guidance
+✔ Weather suggestions
+✔ Crop disease help
+
+Also show:
+
+✔ Smart suggestions panel
+
+Example:
+“Rain expected tomorrow — reduce irrigation”
+
+1️⃣1️⃣ State Management
+
+Global state should store:
+
+user
+cropType
+cropAge
+soilMoisture
+rainStatus
+batteryLevel
+pumpMode
+weatherData
+notifications
+
+1️⃣2️⃣ Real-Time Data Handling
+
+Options:
+
+✔ WebSocket (recommended for sensors)
+✔ Polling every 5–10 sec
+✔ MQTT (IoT best practice)
+
+1️⃣3️⃣ Responsive Design
+
+Must work on:
+
+✔ Desktop
+✔ Tablet
+✔ Mobile
+
+1️⃣4️⃣ Security (Frontend)
+
+✔ JWT token storage
+✔ Protected routes
+✔ Auto logout on expiry
+
+1️⃣5️⃣ Future Enhancements
+
+Multi-farm support
+
+Historical analytics
+
+AI irrigation prediction
+
+Voice assistant
+
+Offline mode
